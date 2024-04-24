@@ -1,0 +1,82 @@
+.card{
+    width: 272px;
+    background-color: #101204;
+    border-radius: 12px;
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #101204, 0px 0px 1px #091e424f);
+    padding: 8px;
+    color: #B6C2CF;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 8px 8px 0px;
+  }
+
+  form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 4px;
+    padding: 8px 8px 0;
+    color: #9fadbc;
+  }
+
+  input{
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 6px 12px 6px 8px;
+    border: none;
+    color: #9fadbc;
+    font-size: 14px;
+    font-weight: 500;
+    outline-style: none;
+  }
+  
+  input:hover{
+    background-color: #282f27;
+    cursor: pointer;
+  }
+
+  .plus-btn{
+    background-color: transparent;
+    color:#9fadbc;
+    border: none;
+    font-size:22px;
+    font-weight: 500;
+  }trasn
+
+  .tasks{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tasks .task{
+    padding: 8px 12px 4px;
+    min-height: 24px;
+    color: rgb(159, 173, 188);
+    background-color:#22272b;
+    border-radius: 8px;
+    margin: 8px 0px;
+}
+
+  .tasks .task:hover{
+    border: 2px solid #85b8ff;
+    cursor: pointer;
+  }
+
+  .tasks .task:not(:first-child, :last-child){
+    margin: 8px 0px;
+  }
+
+  .tasks .task h5{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #b6c2cf;
+  }
