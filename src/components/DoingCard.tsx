@@ -1,56 +1,70 @@
-import "./index.css";
-import { SyntheticEvent ,useState } from 'react';
-import { inputT, tasksT, } from '../Types'
-// import img from '../assets/journal_album_icon_160023.png'
+import { SyntheticEvent, useState } from "react";
+import { Droppable, Draggable } from "react-beautiful-dnd";
+import './index.css'
 
-function Card() {
-  const [input, setInput] = useState<inputT>("");
-  const [tasks, setTasks] = useState<tasksT>([]);
+function DoingCard() {
+  const [input, setInput] = useState("");
+  const [tasks, setTasks] = useState([]);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    setTasks((prev) => [...prev, input]);
-    setInput("");
+    if (input.trim()) {
+      const todo = {
+        name: input,
+        status: "todo",
+        id: Date.now(),
+      };
+
+      const data = JSON.parse(localStorage.getItem("todos") || "[]");
+      data.push(todo);
+      localStorage.setItem("todos", JSON.stringify(data));
+      setTasks((prevTasks) => [...prevTasks, todo]);
+      setInput("");
+    }
   };
 
   return (
     <div className="card">
       <div className="title">
-        <p>Doing</p>
+        <h1>Doing</h1>
         <p>...</p>
       </div>
+      <Droppable droppableId="doing">
+        {(provided) => (
+          <div className="tasks" {...provided.droppableProps} ref={provided.innerRef}>
+            {tasks.map((el, index) => (
+              <Draggable key={el.id} draggableId={el.id.toString()} index={index}>
+                {(provided) => (
+                  <div
+                    className="task"
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <h5>{el.name}</h5>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <form onSubmit={handleSubmit} className="d-flex">
-        <div>
-          <button className="plus-btn" type="submit" onClick={handleSubmit} >
-            +
-          </button>
+        <div className="input-div">
+          <div>
+            <p>+</p>
+          </div>
           <input
             type="text"
             placeholder="Add a card"
             value={input}
-            onChange={(e) => {
-              setInput(String(e.target.value));
-            }}
+            onChange={(e) => setInput(e.target.value)}
           />
         </div>
-        <div>
-          {/* <img src={img} alt="" width="16px" height="16px" color="white"/> */}
-        </div>
       </form>
-      <div className="todo">
-        <div className="tasks">
-          {tasks.length > 0 &&
-            tasks.map((el, index) => {
-              return (
-                <div className="task" key={index}>
-                  <h2>{el}</h2>
-                </div>
-              );
-            })}
-        </div>
-      </div>
     </div>
   );
 }
 
-export default Card;
+export default DoingCard;

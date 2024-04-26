@@ -5,6 +5,8 @@
     box-shadow: var(--ds-shadow-raised, 0px 1px 1px #101204, 0px 0px 1px #091e424f);
     padding: 8px;
     color: #B6C2CF;
+    padding: 8px;
+    height: 100%;
 }
 
 .title{
@@ -12,10 +14,21 @@
     justify-content: space-between;
     align-items: center;
     background-color: transparent;
+  }
+
+  .title h1{
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
-    padding: 8px 8px 0px;
+    padding: 6px 8px 6px 12px;
+    width: 224px;
+  }
+
+  .title p{
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px;
   }
 
   form{
@@ -23,37 +36,52 @@
     align-items: center;
     justify-content: space-between;
     column-gap: 4px;
-    padding: 8px 8px 0;
     color: #9fadbc;
   }
 
-  input{
-    background-color: transparent;
-    border-radius: 8px;
+  .input-div{
+    display: flex;
+    align-items: center;
     padding: 6px 12px 6px 8px;
+    user-select: none;
+    justify-content: flex-start;
+    flex-grow: 1;
+    margin: 0;
+  }
+  
+  .input-div:hover{
+    background-color: #282f27;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .input-div input{
+    background-color: transparent;
     border: none;
     color: #9fadbc;
     font-size: 14px;
     font-weight: 500;
     outline-style: none;
-  }
-  
-  input:hover{
-    background-color: #282f27;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0 ;
   }
 
-  .plus-btn{
+  .input-div p{
     background-color: transparent;
     color:#9fadbc;
     border: none;
-    font-size:22px;
+    font-size: 14px;
     font-weight: 500;
-  }trasn
+    width: 25px;
+  }
 
   .tasks{
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    padding: 2px 4px;
   }
 
   .tasks .task{
@@ -62,17 +90,17 @@
     color: rgb(159, 173, 188);
     background-color:#22272b;
     border-radius: 8px;
-    margin: 8px 0px;
+    height: 100%;
+    border: 2px solid transparent;
 }
+
+
 
   .tasks .task:hover{
     border: 2px solid #85b8ff;
     cursor: pointer;
   }
 
-  .tasks .task:not(:first-child, :last-child){
-    margin: 8px 0px;
-  }
 
   .tasks .task h5{
     font-size: 14px;
