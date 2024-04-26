@@ -1,10 +1,22 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState, useEffect } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import "./index.css";
 
-function DoingCard() {
+ interface TodoT{
+    name: string,
+    status: string,
+    id: number
+  }
+
+
+function DoCard() {
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<TodoT[]>([]);
+
+   useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("do") || "[]");
+    setTasks(data)
+  }, [])
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -15,9 +27,9 @@ function DoingCard() {
         id: Date.now(),
       };
 
-      const data = JSON.parse(localStorage.getItem("todos") || "[]");
+      const data = JSON.parse(localStorage.getItem("do") || "[]");
       data.push(todo);
-      localStorage.setItem("todos", JSON.stringify(data));
+      localStorage.setItem("do", JSON.stringify(data));
       setTasks((prevTasks) => [...prevTasks, todo]);
       setInput("");
     }
@@ -75,4 +87,4 @@ function DoingCard() {
   );
 }
 
-export default DoingCard;
+export default DoCard;

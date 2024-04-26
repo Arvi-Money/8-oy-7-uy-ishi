@@ -3,7 +3,7 @@ import "./App.css";
 import DoCard from "./components/DoCard";
 import DoingCard from "./components/DoingCard";
 import DoneCard from "./components/DoneCard";
-import { DragDropContext, DropResult } from 'react-beautiful-dnd'; // Import DragDropContext
+import { DragDropContext, DropResult } from 'react-beautiful-dnd'; 
 
 interface TodoT{
   name: string
@@ -14,6 +14,7 @@ interface TodoT{
 function App() {
   const [todos, setTodos] = useState<TodoT[]>([])
   const data = JSON.parse(localStorage.getItem("todos") || "[]");
+
   const onDragEnd = (result: DropResult) => {
     console.log(result);
     setTodos(data);
@@ -22,7 +23,7 @@ function App() {
     const { destination, source, draggableId } = result;
 
     if (!destination || destination.droppableId === source.droppableId) {
-        return;
+        return 
     }
 
     const draggedTodo = todos.find(todo => todo.id.toString() === draggableId);
@@ -48,7 +49,6 @@ function App() {
     <>
       <div className="container">
         <div className="cards">
-          {/* Wrap the cards inside DragDropContext */}
           <DragDropContext onDragEnd={onDragEnd}>
             <DoCard></DoCard>
             <DoingCard></DoingCard>

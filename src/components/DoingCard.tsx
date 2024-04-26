@@ -1,10 +1,22 @@
 import { SyntheticEvent, useState } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import './index.css'
+import { useEffect } from "react";
+
+interface TodoT{
+  name: string,
+  status: string,
+  id: number
+}
 
 function DoingCard() {
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<TodoT[]>([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("doing") || "[]");
+    setTasks(data)
+  }, [])
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -13,11 +25,11 @@ function DoingCard() {
         name: input,
         status: "todo",
         id: Date.now(),
-      };
+      }
 
-      const data = JSON.parse(localStorage.getItem("todos") || "[]");
+      const data = JSON.parse(localStorage.getItem("doing") || "[]");
       data.push(todo);
-      localStorage.setItem("todos", JSON.stringify(data));
+      localStorage.setItem("doing", JSON.stringify(data));
       setTasks((prevTasks) => [...prevTasks, todo]);
       setInput("");
     }
